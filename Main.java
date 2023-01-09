@@ -13,6 +13,24 @@ public class Main {
                         Paths.get(path + "\\" + fileName));
 
     }
+    //function to print filename in report
+    public static String fileReport(String fname){
+        String file = fname;
+
+        String fileNameWithoutExtension = file.substring(0, file.lastIndexOf('.'));
+        return fileNameWithoutExtension;
+    }
+
+    //function to print extensions in report
+    public static String extensions(String fname)throws IOException {
+        String file = fname.toString();
+        int index = file.lastIndexOf('.');
+        if (index > 0) {
+            String extension = file.substring(index + 1);
+            return extension;
+        }
+        return null;
+    }
     public static void main (String args[]) throws IOException {
 
             String folderName="";
@@ -33,7 +51,6 @@ public class Main {
                 }
 
             };
-
         FilenameFilter audioFilter = new FilenameFilter() {
             public boolean accept(File dir, String name) {
                 String[] audioArr = {".mp3",".m4a"};
@@ -45,7 +62,6 @@ public class Main {
                 }
                 return false;
             }
-
         };
         FilenameFilter videoFilter = new FilenameFilter() {
             public boolean accept(File dir, String name) {
@@ -58,7 +74,6 @@ public class Main {
                 }
                 return false;
             }
-
         };
             String textFilesList[] = directoryPath.list(textFilter);
             if (textFilesList.length >= 1) {
@@ -67,18 +82,11 @@ public class Main {
                 path = path + folderName;
                 File textFile = new File(path);
                 textFile.mkdir();
-
             }
             for (String fileName : textFilesList) {
                 pathName(fileName, folderName, path);
-                repo=repo+folderName+fileName;
-
-
+                repo=repo+fileReport(fileName)+"\t"+extensions(fileName)+"\t"+folderName+"\n";
             }
-
-
-
-
             String audioFilesList[] = directoryPath.list(audioFilter);
             if (audioFilesList.length >= 1) {
                 path = "C:\\Users\\sowmeiyhap\\Documents\\Files\\";
@@ -90,25 +98,20 @@ public class Main {
             }
             for (String fileName : audioFilesList) {
                 pathName(fileName, folderName, path);
-                repo=repo+folderName+fileName;
-
+                repo=repo+fileReport(fileName)+"\t"+extensions(fileName)+"\t"+folderName+"\n";
 
             }
-
-
-
-           String videoFilesList[] = directoryPath.list(videoFilter);
+            String videoFilesList[] = directoryPath.list(videoFilter);
             if (videoFilesList.length >= 1) {
                 path = "C:\\Users\\sowmeiyhap\\Documents\\Files\\";
                 folderName="video";
                 path = path + folderName;
                 File videoFile = new File(path);
                 videoFile.mkdir();
-
             }
             for (String fileName : videoFilesList) {
                 pathName(fileName, folderName, path);
-                repo=repo+folderName+fileName;
+                repo=repo+fileReport(fileName)+"\t"+extensions(fileName)+"\t"+folderName+"\n";
 
 
             }
@@ -120,11 +123,6 @@ public class Main {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
             }
-
-
-
-
-
         }
     }
 
