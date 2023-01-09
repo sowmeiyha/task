@@ -31,13 +31,19 @@ public class Main {
         }
         return null;
     }
+    //C:\Users\sowmeiyhap\Documents\Files
+    //C:\Users\sowmeiyhap\Documents\report.txt
     public static void main (String args[]) throws IOException {
 
             String folderName="";
             String path = "";
             String repo= "";
-            File directoryPath = new File("C:\\Users\\sowmeiyhap\\Documents\\Files");
+            Scanner sc=new Scanner(System.in);
+            System.out.println("Enter the directory path:");
+            String directory=sc.nextLine();
 
+            File directoryPath = new File(directory);
+            System.out.println(directoryPath);
             FilenameFilter textFilter = new FilenameFilter() {
                 public boolean accept(File dir, String name) {
                     String[] textArr = {".pdf", ".txt", ".doc", ".docx", ".rtf"};
@@ -77,7 +83,7 @@ public class Main {
         };
             String textFilesList[] = directoryPath.list(textFilter);
             if (textFilesList.length >= 1) {
-                path = "C:\\Users\\sowmeiyhap\\Documents\\Files\\";
+                path = directory+"\\";
                 folderName="document";
                 path = path + folderName;
                 File textFile = new File(path);
@@ -89,7 +95,7 @@ public class Main {
             }
             String audioFilesList[] = directoryPath.list(audioFilter);
             if (audioFilesList.length >= 1) {
-                path = "C:\\Users\\sowmeiyhap\\Documents\\Files\\";
+                path = directory+"\\";
                 folderName="audio";
                 path = path + folderName;
                 File audioFile = new File(path);
@@ -103,7 +109,7 @@ public class Main {
             }
             String videoFilesList[] = directoryPath.list(videoFilter);
             if (videoFilesList.length >= 1) {
-                path = "C:\\Users\\sowmeiyhap\\Documents\\Files\\";
+                path = directory+"\\";
                 folderName="video";
                 path = path + folderName;
                 File videoFile = new File(path);
@@ -115,8 +121,13 @@ public class Main {
 
 
             }
+
+            System.out.println("Enter the path for report.txt");
+            String reportPath=sc.nextLine();
+
+
             try {
-                FileWriter reportWrite = new FileWriter("C:\\Users\\sowmeiyhap\\Documents\\report.txt");
+                FileWriter reportWrite = new FileWriter(reportPath);
                 reportWrite.write(repo);
                 reportWrite.close();
             } catch (IOException e) {
